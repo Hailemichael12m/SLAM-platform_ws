@@ -1,0 +1,11 @@
+<launch>
+
+  <arg name="viz" default="true" doc="whether to run a rviz"/>
+  <arg name="rviz_config" default="-d $(find slam_platform_ws)/rviz/slam_platform.rviz" doc="optional rviz config file"/>
+
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
+  <include file="$(find ouster_ros)/ouster.launch" />
+    
+  <node if="$(arg viz)" pkg="rviz" name="rviz" type="rviz" args="$(arg rviz_config)" output="screen" required="true" />
+  
+</launch>
