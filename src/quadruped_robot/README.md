@@ -86,3 +86,65 @@ To navigate:
 - Click and drag at the position you want the robot to go.
 
    ![champ](https://raw.githubusercontent.com/chvmp/champ/master/docs/images/navigation.gif)
+   
+    
+#### 3. Installing SLAM algorithms
+   #### 3.1 faster-lio
+   #### 3.1.2 Dependency
+   
+    $ sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+    $ sudo apt update
+    $ sudo apt install gcc-9 g++-9
+    $ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-9
+    
+  #### 3.1.3 Installation 
+  
+    $ cd ~/your_workspace/src
+    $ git clone https://github.com/gaoxiang12/faster-lio
+    $ cd faster-lio/thirdparty
+    $ tar -xvf tbb2018_20170726oss_lin.tgz
+    $ cd ~/your_workspace
+    $ catkin_make
+  
+  #### 3.2 fast-lio2
+  
+    $ cd ~/your_workspace/src
+    $ git clone https://github.com/Livox-SDK/livox_ros_driver.git
+    $ cd ..
+    $ catkin_make
+
+    $ cd ~/your_workspace/src
+    $ git clone --recursive https://github.com/hku-mars/FAST_LIO.git
+    $ cd ..
+    $ catkin_make
+    
+  #### 3.3 hdl_graph_slam
+  
+  - For dependencies, refer https://github.com/koide3/hdl_graph_slam
+   ```
+    sudo apt-get install ros-noetic-geodesy ros-noetic-pcl-ros ros-noetic-nmea-msgs ros-noetic-libg2o
+```
+    cd ~/your_workspace/src
+    git clone https://github.com/koide3/ndt_omp.git
+    git clone https://github.com/SMRT-AIST/fast_gicp.git --recursive
+    git clone https://github.com/koide3/hdl_graph_slam
+
+    cd .. && catkin_make -DCMAKE_BUILD_TYPE=Release
+     ```
+ #### 4. How to run in gazebo
+ 
+    -Launch gazebo (cf. 2.2.1)
+    
+   #### 4.1 faster_lio
+    
+       roslaunch champ_config faster-lio_slam_gaezebo.launch rviz:=true
+       
+   #### 4.2 fast-lio2
+    
+        roslaunch champ_config fast-lio_slam_gazebo.launch rviz:=true
+        
+   #### 4.3 hdl_graph_slam
+    
+        roslaunch champ_config hdl_graph_slam_gaezebo.launch rviz:=true
+
+
